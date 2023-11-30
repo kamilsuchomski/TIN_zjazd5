@@ -129,39 +129,47 @@ function zwiekszRokSamochodow(){
 
 //-------------------12.1---------
 
-function Ocena(przedmiot, wartosc){
-	this.przedmiot = przedmiot;
-	this.wartosc = wartosc;
+class Ocena{
+	constructor(przedmiot, wartosc){
+		this.przedmiot = przedmiot;
+		this.wartosc = wartosc;
+	}
 }
 
 //-------------------12.2---------
 
-function Student(imie, nazwisko){
-	this.imie = imie;
-	this.nazwisko = nazwisko;
-	this.srednia = 0;
-	this.oceny = [];
-	this.hello = function(){
+class Student{
+	constructor(imie, nazwisko){
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.srednia = 0;
+		this._oceny = [];
+	}
+	
+	hello(){
 		return ("Witaj " + this.imie + " " + this.nazwisko + ", Twoja średnia ocen: " + this.srednia);
 	}
+	
 //-------------------12.3---------
-	this.setOcena = function(stopien){
-		if (stopien instanceof Ocena){
-			this.oceny.push(stopien);
+
+	set oceny(x){
+		if (x instanceof Ocena){
+			this._oceny.push(x);
 			this.srednia = 0;
-			for (let i = 0; i < this.oceny.length; i++){
-				this.srednia += this.oceny[i].wartosc;
+			for (let i = 0; i < this._oceny.length; i++){
+				this.srednia += this._oceny[i].wartosc;
 			}
-			this.srednia = this.srednia / this.oceny.length;
+			this.srednia = this.srednia / this._oceny.length;
 		}			
 	}
+	
 //-------------------12.4---------
-	this.getOcena = function(){
+
+	get oceny(){
 		let temp = "";
-		for (let i = 0; i < this.oceny.length; i++){
-				temp += "Przedmiot: " + this.oceny[i].przedmiot + " - ocena " + this.oceny[i].wartosc + ". ";
+		for (let i = 0; i < this._oceny.length; i++){
+				temp += "Przedmiot: " + this._oceny[i].przedmiot + " - ocena " + this._oceny[i].wartosc + ". ";
 			}
 		return temp;
 	}
 }
-
